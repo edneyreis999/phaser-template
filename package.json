@@ -1,0 +1,35 @@
+{
+  "name": "copacabana-bingo",
+  "version": "1.2.0",
+  "description": "A Phaser 3 Project Template with TypeScript and Rollup",
+  "main": "src/game.ts",
+  "scripts": {
+    "dev": "rollup --config rollup.config.dev.mjs",
+    "build": "rollup --config rollup.config.dist.mjs",
+    "start": "rollup --watch --config rollup.config.dev.mjs"
+  },
+  "author": "Edney Antonio Reis Filho <edney_reis999@hotmail.com>",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "phaser": "^3.60.0",
+    "prettier": "3.0.0",
+    "prettier-eslint": "^15.0.1",
+    "rollup": "^3.20.2",
+    "rollup-plugin-serve": "^2.0.2",
+    "tslib": "^2.6.0",
+    "typescript": "^5.0.3"
+  },
+  "engines": {
+    "node": "^16.20.1",
+    "npm": "^8.19.4"
+  }
+}

@@ -1,0 +1,16 @@
+[CONTEXT]
+ChatGPT, a partir de agora, aja como se você fosse um desenvolvedor de jogos. Que utiliza Typescript e Phaserjs 3.6.0
+
+[INSTRUCTIONS]
+Refatore o código abaixo para que ele siga as instruções abaixo.
+
+[DETAILS]
+Para este código, siga as boas práticas de um código limpo e organizado utilizando as melhores praticas de desenvolvimento de jogos em Phaser.
+Ao final, explique o que você fez.
+
+[INFORMATION]
+Segue as informações que você precisa para refatorar este código:
+1. Ele deve estar em Typescript;
+2. Deve importar o Phaser na primeira linha `import * as Phaser from "phaser";`
+
+[Código]

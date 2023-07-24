@@ -1,0 +1,70 @@
+{
+  // Workbench
+  "workbench.startupEditor": "newUntitledFile",
+
+  // Editor and breadcrumbs
+  "editor.renderControlCharacters": false,
+  "editor.tabSize": 2,
+  "editor.renderLineHighlight": "gutter",
+  "editor.rulers": [79, 120],
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 20,
+  "editor.detectIndentation": true,
+  "editor.snippetSuggestions": "top",
+  "editor.wordBasedSuggestions": false,
+  "editor.suggest.localityBonus": true,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.formatOnPaste": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.mouseWheelScrollSensitivity": 2,
+  "editor.smoothScrolling": true,
+  "editor.mouseWheelZoom": true,
+  "editor.linkedEditing": true,
+  "editor.fontFamily": "'Operator Mono Lig Book', 'SF Mono', Consolas, 'Source Code Pro', 'Dank Mono', 'Fira Code', Menlo, 'Inconsolata', 'Droid Sans Mono', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Courier New', Courier, Monaco, monospace",
+  "editor.glyphMargin": true,
+  "editor.fontLigatures": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "editor.suggestSelection": "first",
+
+  // Git
+  "git.enableSmartCommit": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+
+  // Files and search
+  "files.exclude": {
+    "USE_GITIGNORE": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.build": true,
+    "**/.gh-pages": true
+  },
+
+  // Javascript & TypeScript
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "[javascript]": {
+    "editor.suggestSelection": "recentlyUsed",
+    "editor.suggest.showKeywords": false
+  },
+
+  "editor.inlineSuggest.enabled": true,
+  "git.openRepositoryInParentFolders": "always",
+
+  "typescript.preferences.importModuleSpecifier": "project-relative",
+  "files.eol": "\n"
+}
