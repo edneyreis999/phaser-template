@@ -76,7 +76,7 @@ export class SceneLoad extends BaseScene {
     const pngArray = ['panelBack', 'title', 'face'];
     pngArray.forEach(png => this.loadPng(png));
 
-    const jpgArray = ['sky'];
+    const jpgArray = ['sky', 'dungeon-background-2'];
     jpgArray.forEach(jpg => this.loadJpg(jpg));
 
     this.loadToggle(1);
