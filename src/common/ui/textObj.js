@@ -1,6 +1,6 @@
-import * as Phaser from "phaser";
+import * as Phaser from 'phaser';
 
-import { EventDispatcher } from "../../common/mc/eventDispatcher";
+import { EventDispatcher } from '../../common/mc/eventDispatcher';
 export class TextObj extends Phaser.GameObjects.Text {
   constructor(config) {
     super(config.scene, 0, 0, config.text);
@@ -20,8 +20,8 @@ export class TextObj extends Phaser.GameObjects.Text {
     //
     if (!config.textStyle) {
       config.textStyle = {
-        fontSize: "16px",
-        color: "#ff0000",
+        fontSize: '16px',
+        color: '#ff0000'
       };
     }
     if (config.textStyle) {
@@ -41,7 +41,7 @@ export class TextObj extends Phaser.GameObjects.Text {
     }
     if (config.event) {
       this.setInteractive();
-      this.on("pointerdown", this.onDown, this);
+      this.on('pointerdown', this.onDown, this);
     }
     this.scene.add.existing(this);
     // ut.emitter.on(G.SCENE_CHANGED, this.sceneChanged, this);

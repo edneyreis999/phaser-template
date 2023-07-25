@@ -1,11 +1,7 @@
 import * as Phaser from 'phaser';
 
 export class Align {
-  static scaleToGameW(
-    obj,
-    per: number,
-    scene: Phaser.Scene
-  ): void {
+  static scaleToGameW(obj, per: number, scene: Phaser.Scene): void {
     const { width } = scene.game.config;
     obj.displayWidth = (width as number) * per;
     obj.scaleY = obj.scaleX;

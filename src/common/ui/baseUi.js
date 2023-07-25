@@ -1,8 +1,8 @@
-import { Align } from "../util/align";
-import { AlignGrid } from "../util/alignGrid";
-import { TextObj } from "./textObj";
-import { TextStyles } from "./textStyles";
-import { UIBlock } from "./uiblock";
+import { Align } from '../util/align';
+import { AlignGrid } from '../util/alignGrid';
+import { TextObj } from './textObj';
+import { TextStyles } from './textStyles';
+import { UIBlock } from './uiblock';
 export class BaseUI extends UIBlock {
   constructor(config) {
     super();
@@ -33,7 +33,7 @@ export class BaseUI extends UIBlock {
   }
   setAlignGrid(rows, cols) {
     if (!this.back) {
-      console.log("Back Not Set");
+      console.log('Back Not Set');
       return;
     }
     let startX = this.back.x - this.back.displayWidth / 2;
@@ -48,7 +48,7 @@ export class BaseUI extends UIBlock {
       width: this.back.displayWidth,
       height: this.back.displayHeight,
       startX: startX,
-      startY: startY,
+      startY: startY
     });
   }
   fixGrid() {
@@ -101,7 +101,7 @@ export class BaseUI extends UIBlock {
     let textObj = new TextObj({
       scene: this.scene,
       text: text,
-      textStyle: textStyle,
+      textStyle: textStyle
     });
     this.add(textObj);
 

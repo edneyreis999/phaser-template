@@ -73,15 +73,15 @@ export class SceneLoad extends BaseScene {
     ];
     iconArray.forEach(icon => this.loadIcon(icon));
 
-    const pngArray = ['panelBack', 'title', 'face', 'dialog-box'];
+    const pngArray = ['panelBack', 'title', 'face', 'dialog-box', 'bullet'];
     pngArray.forEach(png => this.loadPng(png));
 
-    const jpgArray = ['sky', 'dungeon-background-2'];
+    const jpgArray = ['sky', 'dungeon-background-2', 'ceu'];
     jpgArray.forEach(jpg => this.loadJpg(jpg));
 
     this.loadToggle(1);
     this.loadToggle(2);
-    this.loadButton('button', 1, 2);
+    this.loadButton('button', 1, 6);
 
     StarBurst.preload(this, this.common + 'images/effects/stars.png');
     ColorBurst.preload(this, this.common + 'images/effects/colorStars.png');

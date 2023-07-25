@@ -1,17 +1,18 @@
 import { BaseScene } from './baseScene';
 export interface SceneProps {
   text: string;
+  name: string;
 }
 export class SceneDialog extends BaseScene {
   private textToDisplay: string;
+  private name: string;
   constructor() {
     super('SceneDialog');
   }
 
   init(data: SceneProps): void {
-    console.log('init data');
-    console.log(data);
     this.textToDisplay = data.text;
+    this.name = data.name;
   }
 
   create(): void {
@@ -19,12 +20,31 @@ export class SceneDialog extends BaseScene {
 
     this.makeAlignGrid(42, 21);
 
-    // const image = this.add.image(0, 0, 'dialog-box').setOrigin(0.5, 1);
-    // this.placeAt(5, 11, image);
     const greedNumber = 35;
-    this.placeImage('dialog-box', { x: 10, y: greedNumber }, 1);
+    const dialogBox = this.placeImage(
+      'dialog-box',
+      { x: 10, y: greedNumber },
+      1
+    );
+    dialogBox.setInteractive();
 
-    this.placeText(this.textToDisplay, { x: 10, y: greedNumber }, 'DIALOG');
+    dialogBox.on('pointerdown', () => {
+      this.scene.stop('SceneDialog');
+      this.scene.resume('SceneMain');
+    });
+
+    const writingAreaWidth = dialogBox.getBounds().width * 0.9;
+
+    this.placeText(this.textToDisplay, { x: 10, y: greedNumber }, 'DIALOG', {
+      align: 'center',
+      wordWrap: {
+        width: writingAreaWidth,
+        useAdvancedWrap: true
+      }
+    });
+    this.placeText(this.name, { x: 6, y: 32 }, 'WHITE');
+
+    // this.aGrid.showNumbers();
   }
   preload(): void {}
   update(): void {}

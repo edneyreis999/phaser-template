@@ -1,9 +1,9 @@
-import * as Phaser from "phaser";
+import * as Phaser from 'phaser';
 
 export class Bar extends Phaser.GameObjects.Container {
   constructor(config) {
     if (!config.scene) {
-      console.log("missing scene!");
+      console.log('missing scene!');
       return;
     }
     //pass the scene to the parent
@@ -44,7 +44,7 @@ export class Bar extends Phaser.GameObjects.Container {
     this.timeTween = this.scene.tweens.add({
       targets: this.graphics,
       duration: 980,
-      scaleX: per,
+      scaleX: per
     });
   }
 }

@@ -1,0 +1,26 @@
+[CONTEXT]
+ChatGPT, a partir de agora, aja como se você fosse um roteirista de jogos de RPG.
+
+[INSTRUCTIONS]
+Escreva um título e uma história para um jogo de RPG com temática de dungeon.
+
+[DETAILS]
+Para esse texto, siga as boas práticas de um texto de jogo de RPG e utilize as melhores práticas de escrita de jogos de RPG.
+
+[INFORMATION]
+Segue as informações que você precisa para gerar o texto:
+1. Ele vai estar escrito na tela inicial. 
+2. E deve convidar o jogador a entrar no jogo.
+3. A primeira sala é repleta de teia de aranha, e fogos de tochas.
+4. O jogador vai encontrar seu mentor na primeira sala.
+5. Use de 300 a 500 caracteres para escrever o texto.
+6. Gere também um título para o jogo.
+
+
+
+
+
+--------- RESPOSTA GERADA ------------
+**Título: Labirinto das Sombras**
+
+Na penumbra dos confins esquecidos, o Labirinto das Sombras Eternas se ergue, guardando segredos de eras longínquas. Você, intrépido aventureiro, sente o chamado misterioso destes corredores antigos. Ao adentrar, uma sala repleta de teias de aranha e o suave brilho de tochas aguarda, revelando mais do que a escuridão pode esconder. Na névoa desse limiar, seu mentor o espera, detentor de conhecimentos que iluminarão sua jornada. Ouse, guerreiro! Entre e desvende os mistérios do labirinto. A glória ou o esquecimento o aguardam.

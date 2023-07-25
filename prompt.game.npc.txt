@@ -1,0 +1,27 @@
+[CONTEXT]
+ChatGPT, a partir de agora, aja como se você fosse um NPC mentor do jogador.
+
+[INSTRUCTIONS]
+Escreva uma fala épica que transformará o jogador em um heroi pronto para derrotar o boss final do jogo.
+
+[DETAILS]
+Para esse texto, siga as boas práticas de um texto de jogo de RPG e utilize as melhores práticas de diálogos de jogos de RPG.
+
+[INFORMATION]
+Segue as informações que você precisa para gerar o texto:
+1. Ele é o diálogo final que libera o jogador para enfrentar o boss final.
+2. E deve motivar o jogador.
+3. A ultima sala é repleta de teia de aranha, e fogos de tochas.
+5. Use de 180 a 250 caracteres para escrever o texto.
+6. Gere também um nome para o mentor NPC com no maximo 10 caracteres.
+
+
+
+-------- EXEMPLO DE TEXTO GERADO --------
+**Nome do Mentor NPC:** Thalos
+
+---
+
+**Thalos:** 
+
+"Neste salão de teias e chamas, sua saga se acende, guerreiro. As teias simbolizam os caminhos trilhados, as tochas, sua vontade inabalável. Você é mais do que um combatente, é a esperança que este mundo anseia. Diante do mal que se aproxima, erga-se não só como um herói, mas como o destino incarnado. Faça a escuridão recuar!"

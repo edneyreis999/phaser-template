@@ -1,12 +1,13 @@
 import * as Phaser from 'phaser';
 
-import { NPC } from '../entity/NPC';
-import { Player } from '../entity/Player';
+import { NPC } from '../entity/npc';
+import { Player } from '../entity/player';
 import { BaseScene } from './baseScene';
 
 export class SceneMain extends BaseScene {
   private player: Player;
   private npc: NPC;
+  private portal: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
   private target: Phaser.Math.Vector2;
 
   constructor() {
@@ -24,6 +25,7 @@ export class SceneMain extends BaseScene {
     this.npc = this.setupNpc();
     this.player = this.setupPlayer();
     this.target = new Phaser.Math.Vector2();
+    this.portal = this.setupPortal();
 
     this.input?.on('pointerdown', pointer => {
       this.target.x = pointer.x;
@@ -36,14 +38,36 @@ export class SceneMain extends BaseScene {
       );
     });
 
-    this.physics.add.overlap(
-      this.player.sprite,
-      this.npc.sprite,
-      (player, npc) => {
-        this.scene.launch('SceneDialog', { text: this.npc.dialogo });
-        this.scene.pause();
+    const npcColider: Phaser.Physics.Arcade.Collider =
+      this.physics.add.collider(
+        this.player.sprite,
+        this.npc.sprite,
+        (player, npc) => {
+          this.scene.launch('SceneDialog', {
+            text: this.npc.dialogo,
+            name: this.npc.name
+          });
+          this.scene.pause();
+          this.physics.world.removeCollider(npcColider);
+          this.player.sprite.body.stop();
+          this.player.isWarrior = true;
+        }
+      );
+
+    this.physics.add.overlap(this.player.sprite, this.portal, () => {
+      if (!this.player.isWarrior) {
+        return;
       }
-    );
+      this.scene.start('PlayScene');
+    });
+  }
+  setupPortal() {
+    const portal = this.physics.add.image(0, 0, 'face');
+    portal.setAlpha(0.5);
+    portal.setScale(0.8);
+    this.placeAt(0, 0, portal);
+    portal.setVisible(false);
+    return portal;
   }
 
   private setUpBaseScene(): void {

@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 
+import { PlayScene } from './scenes/playScene';
 import { SceneDialog } from './scenes/sceneDialog';
 import { SceneLoad } from './scenes/sceneLoad';
 import { SceneMain } from './scenes/sceneMain';
@@ -29,7 +30,7 @@ const config = {
       debug: true
     }
   },
-  scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneDialog]
+  scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneDialog, PlayScene]
 };
 
 new Phaser.Game(config);

@@ -64,9 +64,14 @@ export abstract class BaseScene extends Phaser.Scene {
   placeText(
     text: string,
     pos: { x: number; y: number } | number,
-    style: string
+    style: string,
+    options?: any
   ): TextObj {
-    const textStyle = this.textStyles.getStyle(style);
+    const fixedStyle = this.textStyles.getStyle(style);
+    const textStyle = {
+      ...fixedStyle,
+      style: { ...fixedStyle.style, ...options }
+    };
     const textObj = new TextObj({
       scene: this,
       text: text,
