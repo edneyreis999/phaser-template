@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 
+import { SceneDialog } from './scenes/sceneDialog';
 import { SceneLoad } from './scenes/sceneLoad';
 import { SceneMain } from './scenes/sceneMain';
 import { SceneOver } from './scenes/sceneOver';
@@ -9,8 +10,8 @@ let isMobile = navigator.userAgent.indexOf('Mobile');
 if (isMobile == -1) {
   isMobile = navigator.userAgent.indexOf('Tablet');
 }
-let w = 480;
-let h = 640;
+let w = window.innerHeight * 0.75;
+let h = window.innerHeight;
 
 if (isMobile != -1) {
   w = window.innerWidth;
@@ -22,7 +23,13 @@ const config = {
   width: w,
   height: h,
   parent: 'phaser-game',
-  scene: [SceneLoad, SceneTitle, SceneMain, SceneOver]
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: true
+    }
+  },
+  scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneDialog]
 };
 
 new Phaser.Game(config);
