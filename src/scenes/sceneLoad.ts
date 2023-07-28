@@ -88,6 +88,16 @@ export class SceneLoad extends BaseScene {
     Flare.preload(this, this.common + 'images/effects/flare.png');
 
     this.load.image('holder', this.common + 'images/ui/backs/holder.jpg');
+
+    this.load.spritesheet('player', 'assets/player/player.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+
+    this.load.spritesheet('npc', 'assets/npcs/npcs.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    });
   }
 
   private loadButton(key: string, style: number, number: number): void {

@@ -1,3 +1,5 @@
+import * as Phaser from 'phaser';
+
 export class Player {
   private _maxHealth: number;
   private _health: number;
@@ -5,11 +7,13 @@ export class Player {
   private scene: Phaser.Scene;
   private _speed: number;
   private _isWarrior: boolean;
+  anims: Phaser.Animations.AnimationManager;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     this.scene = scene;
-    this._sprite = scene.physics.add.image(x, y, 'face');
-    this._sprite.setScale(0.25);
+
+    this._sprite = scene.physics.add.sprite(x, y, 'player', 0);
+    this._sprite.setScale(1.5);
     this._sprite.setName('player');
 
     // this.sprite.body.onCollide = true;
@@ -17,6 +21,12 @@ export class Player {
     this._maxHealth = 100;
     this._health = this._maxHealth;
     this._isWarrior = false;
+
+    // initAnimations(this.scene.anims);
+  }
+
+  public turnWarrior(): void {
+    this._sprite.setTexture('player', 55);
   }
 
   public get sprite(): Phaser.Types.Physics.Arcade.ImageWithDynamicBody {

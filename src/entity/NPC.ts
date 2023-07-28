@@ -6,8 +6,10 @@ export class NPC {
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     this.scene = scene;
-    this._sprite = scene.physics.add.image(x, y, 'face').setImmovable(true);
-    this._sprite.setScale(0.25);
+    this._sprite = scene.physics.add
+      .sprite(x, y, 'player', 48)
+      .setImmovable(true);
+    this._sprite.setScale(1.5);
     this._sprite.setTint(0x00ffff);
     this._sprite.setName('npc');
 

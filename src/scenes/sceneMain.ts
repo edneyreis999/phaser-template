@@ -20,7 +20,6 @@ export class SceneMain extends BaseScene {
     this.setUpBaseScene();
     this.setupBackground();
     this.createAlignGrid();
-    this.showGridNumbers();
     this.createUI();
     this.npc = this.setupNpc();
     this.player = this.setupPlayer();
@@ -51,6 +50,9 @@ export class SceneMain extends BaseScene {
           this.physics.world.removeCollider(npcColider);
           this.player.sprite.body.stop();
           this.player.isWarrior = true;
+
+          // Transforma o player em guerreiro
+          this.player.turnWarrior();
         }
       );
 
@@ -76,10 +78,6 @@ export class SceneMain extends BaseScene {
 
   private createAlignGrid(): void {
     this.makeAlignGrid(11, 11);
-  }
-
-  private showGridNumbers(): void {
-    this.aGrid.showNumbers();
   }
 
   private createUI(): void {

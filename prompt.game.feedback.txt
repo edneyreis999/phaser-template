@@ -16,6 +16,8 @@ Segue as informações que você precisa para refatorar este código:
 4. O código deve estar comentado;
 
 [Código]
+import * as Phaser from 'phaser';
+
 import { Bar } from '../common/comps/bar';
 import { Align } from '../common/util/align';
 import { Boss } from '../entity/boss';
@@ -48,7 +50,6 @@ export class PlayScene extends BaseScene {
     this.setupBossBullets();
     this.target = new Phaser.Math.Vector2();
 
-    this.aGrid.showNumbers();
     this.createUI();
 
     this.input?.on('pointerdown', pointer => {
@@ -140,6 +141,7 @@ export class PlayScene extends BaseScene {
   setupPlayer(): Player {
     const player = new Player(this, 0, 0);
     this.placeAt(1, 2, player.sprite);
+    player.turnWarrior();
 
     return player;
   }
@@ -163,6 +165,7 @@ export class PlayScene extends BaseScene {
     this.bar.setPercent(1);
   }
 }
+
 
 
 
@@ -202,31 +205,29 @@ export class PlayScene extends BaseScene {
 
     this.player = this.setupPlayer();
     this.boss = this.setupBoss();
-    this.setupBossBullets();
     this.target = new Phaser.Math.Vector2();
 
-    this.aGrid.showNumbers();
+    this.setupBossBullets();
     this.createUI();
 
-    this.input?.on('pointerdown', pointer => {
-      this.target.x = pointer.x;
-      this.target.y = pointer.y;
+    this.input?.on('pointerdown', this.handlePointerDown.bind(this));
+  }
 
-      this.physics.moveToObject(
-        this.player.sprite,
-        this.target,
-        this.player.speed
-      );
-    });
+  handlePointerDown(pointer: Phaser.Input.Pointer): void {
+    this.target.set(pointer.x, pointer.y);
+    this.physics.moveToObject(
+      this.player.sprite,
+      this.target,
+      this.player.speed
+    );
   }
 
   update(): void {
-    this.handlePlayerMovement();
-    this.handleBossRotation();
+    this.updatePlayerMovement();
+    this.updateBossRotation();
   }
 
-  // Handles player movement and stopping at the target
-  handlePlayerMovement(): void {
+  updatePlayerMovement(): void {
     const tolerance = 4;
     if (this.player.sprite) {
       const distance = Phaser.Math.Distance.BetweenPoints(
@@ -240,8 +241,8 @@ export class PlayScene extends BaseScene {
     }
   }
 
-  // Rotates the boss to face the player
-  handleBossRotation(): void {
+  updateBossRotation(): void {
+    // rotate boss to face player
     this.boss.sprite.rotation = Phaser.Math.Angle.Between(
       this.boss.sprite.x,
       this.boss.sprite.y,
@@ -250,7 +251,31 @@ export class PlayScene extends BaseScene {
     );
   }
 
-  // Handles bullet logic and collisions
+  handlePlayerDamage(
+    player: Phaser.GameObjects.GameObject,
+    bullet: Phaser.GameObjects.GameObject
+  ): void {
+    const bulletImage = bullet as Phaser.GameObjects.Image;
+    bulletImage.destroy();
+
+    const { health, maxHealth } = this.player;
+    const { damage } = this.boss;
+
+    this.player.health = Math.max(health - damage, 0);
+
+    const healthPercent = this.player.health / maxHealth;
+    this.bar.setPercent(Math.max(healthPercent, 0));
+
+    this.player.sprite.setTint(0xff0000); // Add red tint for damage feedback
+    this.time.delayedCall(300, () => {
+      this.player.sprite.clearTint(); // Clear tint after 300ms
+    });
+
+    if (this.player.health <= 0) {
+      this.scene.start('SceneTitle');
+    }
+  }
+
   setupBossBullets(): void {
     this.enemyBullets = this.physics.add.group({
       classType: Bullet,
@@ -260,43 +285,23 @@ export class PlayScene extends BaseScene {
     this.enemyFiring = this.time.addEvent({
       delay: 2000,
       loop: true,
-      callback: this.fireBullet
+      callback: () => {
+        const bullet = this.enemyBullets
+          .get()
+          .setActive(true)
+          .setVisible(true) as Bullet;
+        if (bullet) {
+          bullet.fire(this.boss.sprite, this.player.sprite);
+        }
+      }
     });
 
     this.physics.add.collider(
       this.player.sprite,
       this.enemyBullets,
-      (player, bullet) => this.handleBulletCollision(player, bullet)
+      this.handlePlayerDamage.bind(this)
     );
   }
-
-  // Fires a bullet from the boss to the player
-  fireBullet = (): void => {
-    const bullet = this.enemyBullets
-      .get()
-      .setActive(true)
-      .setVisible(true) as Bullet;
-
-    if (bullet) {
-      bullet.fire(this.boss.sprite, this.player.sprite);
-    }
-  };
-
-  // Handles the logic when the bullet hits the player
-  handleBulletCollision = (player, bullet): void => {
-    bullet.destroy();
-    this.player.health = Math.max(this.player.health - this.boss.damage, 0);
-    const healthPercent = this.player.health / this.player.maxHealth;
-    this.bar.setPercent(Math.max(healthPercent, 0));
-
-    // Player damage feedback: brief red tint
-    player.setTint(0xff0000);
-    this.time.delayedCall(200, () => player.clearTint());
-
-    if (this.player.health <= 0) {
-      this.scene.start('SceneTitle');
-    }
-  };
 
   setupBoss(): Boss {
     const boss = new Boss(this, 0, 0);
@@ -307,25 +312,21 @@ export class PlayScene extends BaseScene {
   setupPlayer(): Player {
     const player = new Player(this, 0, 0);
     this.placeAt(1, 2, player.sprite);
+    player.turnWarrior();
     return player;
   }
 
-  preload(): void {}
-
   createUI(): void {
-    this.bar2 = new Bar({
-      scene: this,
-      height: (this.sys.game.config.height as number) * 0.1,
-      width: (this.sys.game.config.width as number) * 0.8,
-      color: 0xffffff
-    });
-    this.bar = new Bar({
-      scene: this,
-      height: (this.sys.game.config.height as number) * 0.1,
-      width: (this.sys.game.config.width as number) * 0.8
-    });
+    const height = (this.sys.game.config.height as number) * 0.1;
+    const width = (this.sys.game.config.width as number) * 0.8;
+
+    this.bar2 = new Bar({ scene: this, height, width, color: 0xffffff });
+    this.bar = new Bar({ scene: this, height, width });
+
     Align.centerH(this.bar, this);
     Align.centerH(this.bar2, this);
     this.bar.setPercent(1);
   }
+
+  preload(): void {}
 }
