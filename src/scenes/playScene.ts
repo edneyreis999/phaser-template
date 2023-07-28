@@ -79,11 +79,14 @@ export class PlayScene extends BaseScene {
   }
 
   handlePlayerDamage(
-    player: Phaser.GameObjects.GameObject,
-    bullet: Phaser.GameObjects.GameObject
+    player:
+      | Phaser.Types.Physics.Arcade.GameObjectWithBody
+      | Phaser.Tilemaps.Tile,
+    bullet:
+      | Phaser.Types.Physics.Arcade.GameObjectWithBody
+      | Phaser.Tilemaps.Tile
   ): void {
-    const bulletImage = bullet as Phaser.GameObjects.Image;
-    bulletImage.destroy();
+    bullet.destroy();
 
     const { health, maxHealth } = this.player;
     const { damage } = this.boss;
@@ -123,11 +126,9 @@ export class PlayScene extends BaseScene {
       }
     });
 
-    this.physics.add.collider(
-      this.player.sprite,
-      this.enemyBullets,
-      this.handlePlayerDamage.bind(this)
-    );
+    this.physics.add.collider(this.player.sprite, this.enemyBullets, (a, b) => {
+      this.handlePlayerDamage(a, b);
+    });
   }
 
   setupBoss(): Boss {
