@@ -50,23 +50,23 @@ export class AlignGrid {
   }
   placeAt(xx, yy, obj) {
     //calc position based upon the cellwidth and cellheight
-    var x2 = this.startX + this.cw * xx + this.cw / 2;
-    var y2 = this.startY + this.ch * yy + this.ch / 2;
+    const x2 = this.startX + this.cw * xx + this.cw / 2;
+    const y2 = this.startY + this.ch * yy + this.ch / 2;
     obj.x = x2;
     obj.y = y2;
     return { x: x2, y: y2, sx: this.startX, sy: this.startY };
   }
   placeAtIndex(index, obj) {
-    var yy = Math.floor(index / this.config.cols);
-    var xx = index - yy * this.config.cols;
+    const yy = Math.floor(index / this.config.cols);
+    const xx = index - yy * this.config.cols;
     return this.placeAt(xx, yy, obj);
   }
   showNumbers() {
     this.show();
-    var count = 0;
-    for (var i = 0; i < this.config.rows; i++) {
-      for (var j = 0; j < this.config.cols; j++) {
-        var numText = this.scene.add.text(0, 0, count, {
+    let count = 0;
+    for (let i = 0; i < this.config.rows; i++) {
+      for (let j = 0; j < this.config.cols; j++) {
+        const numText = this.scene.add.text(0, 0, count, {
           color: '#ff0000'
         });
         numText.setOrigin(0.5, 0.5);
@@ -77,10 +77,10 @@ export class AlignGrid {
   }
   showPos() {
     this.show();
-    for (var i = 0; i < this.config.rows; i++) {
-      for (var j = 0; j < this.config.cols; j++) {
-        let posString = 'x:' + j + '\ny:' + i;
-        var numText = this.scene.add.text(0, 0, posString, {
+    for (let i = 0; i < this.config.rows; i++) {
+      for (let j = 0; j < this.config.cols; j++) {
+        const posString = 'x:' + j + '\ny:' + i;
+        const numText = this.scene.add.text(0, 0, posString, {
           color: '#ff0000',
           fontSize: 16,
           fontStyle: 'bold',
@@ -92,16 +92,16 @@ export class AlignGrid {
     }
   }
   findNearestIndex(xx, yy) {
-    var row = Math.floor(yy / this.ch);
-    var col = Math.floor(xx / this.cw);
-    var index = row * this.config.cols + col;
+    const row = Math.floor(yy / this.ch);
+    const col = Math.floor(xx / this.cw);
+    const index = row * this.config.cols + col;
     return index;
   }
   getPosByIndex(index) {
-    var yy = Math.floor(index / this.config.cols);
-    var xx = index - yy * this.config.cols;
-    var x2 = this.cw * xx + this.cw / 2;
-    var y2 = this.ch * yy + this.ch / 2;
+    const yy = Math.floor(index / this.config.cols);
+    const xx = index - yy * this.config.cols;
+    const x2 = this.cw * xx + this.cw / 2;
+    const y2 = this.ch * yy + this.ch / 2;
     return {
       x: x2,
       y: y2
